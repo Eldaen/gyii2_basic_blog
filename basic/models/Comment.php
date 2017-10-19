@@ -48,4 +48,14 @@ class Comment extends \yii\db\ActiveRecord
             'date' => 'Date',
         ];
     }
+
+    public function getDate()
+    {
+        return Yii::$app->formatter->asDatetime($this->date);
+    }
+
+    public function getUser()
+    {
+        return UserProfile::getUserName($this->user_id);
+    }
 }

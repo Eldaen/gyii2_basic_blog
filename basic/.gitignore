@@ -1,6 +1,10 @@
 # phpstorm project files
 .idea
 
+# yii vendor files
+basic/vendor
+basic/config/app-config.ini
+
 # netbeans project files
 nbproject
 

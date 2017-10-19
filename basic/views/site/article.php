@@ -12,6 +12,7 @@ use yii\helpers\Html; ?>
         <?= $this->render('/partials/comments',
             [
                 'article' => $article,
+                'comments' => $comments,
                 'commentForm' => $commentForm
             ]) ?>
     </div>

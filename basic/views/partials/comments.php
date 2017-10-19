@@ -42,5 +42,23 @@
     </div>
     <button type="submit" class="btn send-btn">Опубликовать комментарий</button>
     <?php \yii\widgets\ActiveForm::end();?>
+
+    <?php if(!empty($comments)) { ?>
+
+    <?php  foreach($comments as $comment) {?>
+        <div class="bottom-comment"><!--bottom comment-->
+            <div class="comment-text">
+
+                <h4 class="comment-text__header"><?= $comment->getUser()?></h4>
+
+                <p class="comment-text__date">
+                    <?= $comment->getDate(); ?>
+                </p>
+
+
+                <p class="para"><?= $comment->text; ?></p>
+            </div>
+        </div>
+    <?php } }?>
 </div>
 

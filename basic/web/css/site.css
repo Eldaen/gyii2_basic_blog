@@ -182,3 +182,18 @@ a.desc:after {
     height: 100px;
 }
 
+.comment-text
+{
+    margin-top: 3px;
+    border: 1px solid #eee;
+    padding: 20px;
+}
+.comment-text__header
+{
+    margin-bottom: 4px;
+}
+.comment-text__date
+{
+    font-size: 12px;
+}
+

@@ -69,4 +69,22 @@ class BlogEntry extends \yii\db\ActiveRecord
         $this->viewed =+ 1;
         return $this->save(false);
     }
+
+    public function getComments()
+    {
+        return $this->hasMany(Comment::className(), ['article_id' => 'id']);
+    }
+    public function getArticleComments()
+    {
+        return $this->getComments()->where(['status' => 1])->all();
+    }
+    public function getArticleCommentsCount()
+    {
+        return $this->getComments()->where(['status' => 1])->count();
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(UserProfile::className(), ['id' => 'user_id']);
+    }
 }

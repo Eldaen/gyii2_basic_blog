@@ -132,4 +132,9 @@ class UserProfile extends ActiveRecord implements IdentityInterface
         $this->password = $this->setPassword($this->password);
         return parent::beforeSave($insert);
     }
+
+    public static function getUserName($id)
+    {
+       return static::findOne(['id' => $id])->name;
+    }
 }
