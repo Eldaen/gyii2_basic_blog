@@ -89,33 +89,22 @@ class Task extends ActiveRecord
         return $this->hasOne(UserProfile::className(), ['id' => 'fk_user_id']);
     }
 
-    public function daysAndEvents($date = null)
+    public function daysAndEvents($year, $month)
     {
-        if(!$date)
-        {
-            $daysInMonth = date('t');
+            $daysInMonth = date('t', mktime(0, 0, 0, $month, 1, $year));
 
-           for ($i = 0; $i <= $daysInMonth; $i++)
-           {
-               //TODO: date('m'), $i, date('Y') заменить на данные из формы
-               $time = mktime(0, 0, 0, date('m'), $i, date('Y')); //Получаем время из даты
-               $this->events[$i] = self::findAll(['date' => $time]);
-           }
-        } else {
-            $array = explode('-', $date);
-            $daysInMonth = date('t', mktime(0, 0, 0, $array[1], 1, $array[0]));
             for ($i = 0; $i <= $daysInMonth; $i++)
             {
-                $time = mktime(0, 0, 0, $array[1], $i, $array[0]);
+                $time = mktime(0, 0, 0, $month, $i, $year);
                 //var_dump($time); exit;
                 //$time = mktime(0, 0, 0, date('m'), $i, date('Y')); //Получаем время из даты
-                $this->events[$i] = self::findAll(['date' => $time]);
-                //$this->events[$i] = self::find()->where(['date' => $time])->asArray()->all();
+                //$this->events[$i] = self::findAll(['date' => $time]);
+                $this->events[$i] = self::find()->where(['date' => $time])->asArray()->all();
             }
-        }
 
 
-        return $this->events;
+
+        return json_encode($this->events);
 
 
     }

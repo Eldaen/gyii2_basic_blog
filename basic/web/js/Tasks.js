@@ -1,10 +1,14 @@
-function Tasks(elem)
+function Tasks(elem, form)
 {
     this.elem = elem;
+    this.form = form;
 
-    this.requestTasks = function (callback, basket) {
+    this.requestTasks = function (callback) {
+        var searchParams = this.getDataParams();
+
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', './my/index2', true);
+        xhr.open('GET', '../my/tasks'+'?year=' + searchParams[0] + '&month=' + searchParams[1], true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send();
 
         xhr.onreadystatechange = function () {
@@ -16,34 +20,48 @@ function Tasks(elem)
     };
 
     this.render = function () {
-
-
+        elem.innerText = '';
         this.requestTasks(
             function() {
+                var days = JSON.parse(this.responseText);
 
-                for (var i; i < this.responseText.length; i++)
+                for (var i = 0; i < days.length; i++)
                 {
-                    var date = new Date(this.responseText[i].date);
+                    var tr = document.createElement('tr');
+                    var date = new Date(days[i].date);
                     var day = date.getDay();
 
-                    var tr = document.createElement('tr');
                     var td = document.createElement('td');
                     td.classList = 'td-date';
-                    td.appendChild(td);
+                    tr.appendChild(td);
 
                     var span = document.createElement('span');
                     span.classList = 'label label-success';
-                    span.innerText = day;
+                    span.innerText = i;
                     td.appendChild(span);
 
-                    for (var j; j < this.responseText[i].length; j++)
+                    for (var j = 0; j < days[i].length; j++)
                     {
-                        var task = new TaskDisplayer(td, this.responseText[i]);
+                        var task = new SingleTask(tr, days[i][j]);
                         task.draw();
                     }
+
+                    if(days[i].length > 0)
+                    {
+                        var count = document.createElement('td');
+                        count.classList = 'td-event';
+                        count.innerText = days[i].length;
+                        tr.appendChild(count);
+                    }
+                    elem.appendChild(tr);
                 }
-                elem.innerHTML = this.responseText;
+
             }
         )
     };
+
+    this.getDataParams = function ()
+    {
+        return this.form.value.split('-');
+    }
 }

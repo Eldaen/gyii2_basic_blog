@@ -10,32 +10,20 @@ use yii\web\Controller;
 
 class MyController extends Controller
 {
-    public function actionIndex()
-    {
-        $model = new Task();
-        $tasks = $model->daysAndEvents();
-
-        return $this->render('index', ['tasks' => $tasks]);
-    }
-    public function actionIndex2()
+    public function actionIndex($year = null, $month = null)
     {
         $model = new Task();
         $date = new TaskFilter();
         $currentMonth = null;
 
-        if($date->load(Yii::$app->request->post()))
-        {
-            $tasks = $model->daysAndEvents($date->sort_date);
-            $array = explode('-', $date->sort_date);
-            $currentMonth = $array[0] . '-' . $array[1];
-        } else {
-            $tasks = $model->daysAndEvents();
-        }
 
-        return $this->render('index2', [
+        $tasks = $model->daysAndEvents($year, $month);
+
+
+        return $this->render('index', [
             'tasks' => $tasks,
             'date' => $date,
-            'currentMonth' => $currentMonth
+            'current' => $year . "-" . $month
         ]);
     }
 
@@ -52,5 +40,11 @@ class MyController extends Controller
             'dataProvider' => $dataProvider,
             'date' => date('j.m.Y', $date),
         ]);
+    }
+
+    public function actionTasks($year = null, $month = null)
+    {
+        $date = new Task();
+        return $date->daysAndEvents($year, $month);
     }
 }
