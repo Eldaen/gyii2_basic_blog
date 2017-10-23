@@ -197,3 +197,7 @@ a.desc:after {
     font-size: 12px;
 }
 
+.tasks-filter
+{
+    margin-bottom: 20px;
+}

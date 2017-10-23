@@ -7,7 +7,6 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-
     'modules' => [
         'admin' => [
             'class' =>  'app\modules\admin\Admin'
