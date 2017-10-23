@@ -101,12 +101,7 @@ class Task extends ActiveRecord
                 //$this->events[$i] = self::findAll(['date' => $time]);
                 $this->events[$i] = self::find()->where(['date' => $time])->asArray()->all();
             }
-
-
-
         return json_encode($this->events);
-
-
     }
 
     public function beforeSave($insert)

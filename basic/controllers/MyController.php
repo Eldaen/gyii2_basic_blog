@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 
+use app\models\Calendar;
 use app\models\Task;
 use app\models\TaskFilter;
 use Yii;
@@ -12,19 +13,13 @@ class MyController extends Controller
 {
     public function actionIndex($year = null, $month = null)
     {
-        $model = new Task();
+
         $date = new TaskFilter();
-        $currentMonth = null;
-
-
-        $tasks = $model->daysAndEvents($year, $month);
-
-
-        return $this->render('index', [
-            'tasks' => $tasks,
-            'date' => $date,
-            'current' => $year . "-" . $month
-        ]);
+        return $this->render('index',
+            [
+                'date' => $date,
+                'current' => date('Y') . "-" . date('m')
+            ]);
     }
 
     public function actionEvents($date)
@@ -44,7 +39,8 @@ class MyController extends Controller
 
     public function actionTasks($year = null, $month = null)
     {
-        $date = new Task();
-        return $date->daysAndEvents($year, $month);
+        $date = new Calendar($year, $month);
+        //var_dump($date->json);
+        return $date->json;
     }
 }

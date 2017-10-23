@@ -201,3 +201,30 @@ a.desc:after {
 {
     margin-bottom: 20px;
 }
+
+.tasks-table__day {
+    width: 14.2857%;
+    height: 100px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #eee;
+    border-right: none;
+}
+
+.tasks-table__day--last {
+    border-right: 1px solid #eee;
+}
+
+.tasks-table__day--darken
+{
+    background-color: #f9f7f7;
+}
+
+.task-table__link
+{
+    display: block;
+    background-color: #adf;
+    text-align: center;
+    text-decoration: none;
+}
+
