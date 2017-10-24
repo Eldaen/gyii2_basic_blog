@@ -40,7 +40,9 @@ class MyController extends Controller
     public function actionTasks($year = null, $month = null)
     {
         $date = new Calendar($year, $month);
-        //var_dump($date->json);
-        return $date->json;
+        $jsonData = Yii::$app->cache->getOrSet(['calendar_tasks', 'month' => $month, 'year' => $year], function() use ($date) {
+            return $date->json;
+        }, 5);
+        return $jsonData;
     }
 }

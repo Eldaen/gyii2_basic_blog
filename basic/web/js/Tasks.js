@@ -65,33 +65,6 @@ function Tasks(elem, form)
 
                     result += '<td class="tasks-table__day">';
                     result += '<span class="tasks-table__date">' + (i+1-response.firstDayCount) +' ' + monthName + '.</span></td>';
-                   /* var tr = document.createElement('tr');
-                    var date = new Date(days[i].date);
-                    var day = date.getDay();
-
-                    var td = document.createElement('td');
-                    td.classList = 'td-date';
-                    tr.appendChild(td);
-
-                    var span = document.createElement('span');
-                    span.classList = 'label label-success';
-                    span.innerText = i;
-                    td.appendChild(span);
-
-                    for (var j = 0; j < days[i].length; j++)
-                    {
-                        var task = new SingleTask(tr, days[i][j]);
-                        task.draw();
-                    }
-
-                    if(days[i].length > 0)
-                    {
-                        var count = document.createElement('td');
-                        count.classList = 'td-event';
-                        count.innerText = days[i].length;
-                        tr.appendChild(count);
-                    }
-                    elem.appendChild(tr);*/
                 }
                 elem.innerHTML = result;
             });
@@ -101,10 +74,4 @@ function Tasks(elem, form)
     {
         return this.form.value.split('-');
     };
-
-    this.getMonthNames = function (val)
-    {
-        var months = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сент', 'Окт', 'Ноя', 'Дек'];
-        return months[val];
-    }
 }
