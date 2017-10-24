@@ -223,6 +223,9 @@ a.desc:after {
 .task-table__link
 {
     display: block;
+    margin-top: 18px;
+    height: 45px;
+    line-height: 46px;
     background-color: #adf;
     text-align: center;
     text-decoration: none;

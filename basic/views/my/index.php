@@ -19,83 +19,26 @@ use yii\widgets\ActiveForm;
     <div class="row tasks-filter">
         <div class="date col-md-5">
             <?= $form->field($date, 'sort_date')->input('month', ['value' => $current, 'id' => 'search-form']) ?>
-            <?= Html::submitButton('Filter', ['class' => 'btn btn-primary col-md-3']) ?>
         </div>
     </div>
 </div>
 <?php //ActiveForm::end(); ?>
 <table class="table table-bordered tasks-table">
-    <tbody>
-        <tr>
-            <td class="tasks-table__day"><span class="tasks-table__date">1 Окт.</span></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-        </tr>
-        <tr>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-        </tr>
-        <tr>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-        </tr>
-        <tr>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-        </tr>
-        <tr>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-        </tr>
-        <tr>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-            <td class="tasks-table__day"></td>
-        </tr>
-    </tbody>
+
 </table>
 <script>
     window.onload = function () {
-        var table = document.body.querySelector('.tasks-table>tbody');
+        var table = document.body.querySelector('.tasks-table');
          var searchForm = document.getElementById('search-form');
-         var tasks = new Tasks(table, searchForm);
-         tasks.render();
-         searchForm.onchange = function() {
-         tasks.render();
-         };
+         var calendar = new Calendar(table, searchForm);
+
     }
 
 </script>
-<script src="../js/SingleTask.js"></script>
-<script src="../js/Tasks.js"></script>
+<script src="../js/Container.js"></script>
+<script src="../js/CalendarDay.js"></script>
+<script src="../js/CalendarRow.js"></script>
+<script src="../js/Calendar.js"></script>
 
 <? /* $this->registerAssetBundle(yii\web\JqueryAsset::className(), View::EVENT_AFTER_RENDER); */ ?>
 
