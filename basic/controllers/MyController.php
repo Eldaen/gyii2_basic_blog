@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 
+use app\models\Calendar;
 use app\models\Task;
 use app\models\TaskFilter;
 use Yii;
@@ -10,33 +11,15 @@ use yii\web\Controller;
 
 class MyController extends Controller
 {
-    public function actionIndex()
+    public function actionIndex($year = null, $month = null)
     {
-        $model = new Task();
-        $tasks = $model->daysAndEvents();
 
-        return $this->render('index', ['tasks' => $tasks]);
-    }
-    public function actionIndex2()
-    {
-        $model = new Task();
         $date = new TaskFilter();
-        $currentMonth = null;
-
-        if($date->load(Yii::$app->request->post()))
-        {
-            $tasks = $model->daysAndEvents($date->sort_date);
-            $array = explode('-', $date->sort_date);
-            $currentMonth = $array[0] . '-' . $array[1];
-        } else {
-            $tasks = $model->daysAndEvents();
-        }
-
-        return $this->render('index2', [
-            'tasks' => $tasks,
-            'date' => $date,
-            'currentMonth' => $currentMonth
-        ]);
+        return $this->render('index',
+            [
+                'date' => $date,
+                'current' => date('Y') . "-" . date('m')
+            ]);
     }
 
     public function actionEvents($date)
@@ -52,5 +35,14 @@ class MyController extends Controller
             'dataProvider' => $dataProvider,
             'date' => date('j.m.Y', $date),
         ]);
+    }
+
+    public function actionTasks($year = null, $month = null)
+    {
+        $date = new Calendar($year, $month);
+        $jsonData = Yii::$app->cache->getOrSet(['calendar_tasks', 'month' => $month, 'year' => $year], function() use ($date) {
+            return $date->json;
+        }, 5);
+        return $jsonData;
     }
 }
