@@ -58,6 +58,7 @@ Calendar.prototype.highlightGrid = function () {
     }
 };
 
+// Старт компонента
 Calendar.prototype.init = function () {
     this.getDateParams();
     this.requestTasks(      // Запросили данные о днях и задачах у сервера
