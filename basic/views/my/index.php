@@ -1,5 +1,7 @@
 <?php
 /** @var array $tasks */
+
+use app\components\CalendarWidget;
 use yii\base\Request;
 use yii\base\View;
 use yii\helpers\Html;
@@ -23,18 +25,21 @@ use yii\widgets\ActiveForm;
     </div>
 </div>
 <?php //ActiveForm::end(); ?>
-<table class="table table-bordered tasks-table">
 
-</table>
-<script>
+    <?= CalendarWidget::widget(
+            [
+                    'tableClasses' => 'table table-bordered'
+            ]
+    ) ?>
+
+<!--<script>
     window.onload = function () {
-        var table = document.body.querySelector('.tasks-table');
+         var table = document.body.querySelector('.tasks-table');
          var searchForm = document.getElementById('search-form');
          var calendar = new Calendar(table, searchForm);
-
     }
 
-</script>
+</script>-->
 <script src="../js/Container.js"></script>
 <script src="../js/CalendarDay.js"></script>
 <script src="../js/CalendarRow.js"></script>
