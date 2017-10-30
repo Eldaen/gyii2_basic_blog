@@ -9,28 +9,31 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 ?>
-<?php $form = ActiveForm::begin(
-    [
-        'action' =>
-            [
-                'my/index2'
-            ]
-    ]
-); ?>
-<div class="col-md-12">
-    <div class="row tasks-filter">
-        <div class="date col-md-5">
-            <?= $form->field($date, 'sort_date')->input('month', ['value' => $current, 'id' => 'search-form']) ?>
-        </div>
-    </div>
-</div>
-<?php //ActiveForm::end(); ?>
 
-    <?= CalendarWidget::widget(
+
+    <? CalendarWidget::begin(
             [
                     'tableClasses' => 'table table-bordered'
             ]
     ) ?>
+            <?php $form = ActiveForm::begin(
+                [
+                    'action' =>
+                        [
+                            'my/index2'
+                        ]
+                ]
+            ); ?>
+            <div class="col-md-12">
+                <div class="row tasks-filter">
+                    <div class="date col-md-5">
+                        <?= $form->field($date, 'sort_date')->input('month', ['value' => $current, 'id' => 'search-form']) ?>
+                    </div>
+                </div>
+            </div>
+            <?php ActiveForm::end(); ?>
+
+    <? CalendarWidget::end() ?>
 
 <!--<script>
     window.onload = function () {
